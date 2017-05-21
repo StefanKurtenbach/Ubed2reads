@@ -1,5 +1,6 @@
 # Ubed2reads
 Extracts number of reads in regions defined by a bed file from bam files
+Requirements: Samtools
 
 Given a input BED file, this tool will extract the number of reads in each region seperatelly from one or multiple bam files.
 
