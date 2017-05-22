@@ -1,11 +1,14 @@
+#version 1.1
+
 import subprocess
 import csv
 
 bams = ["/projects/med/hlab/bds_Yang/ASXL1_WTtest/align/rep1/ASXL1_WT_R1.trim.PE2SE.nodup.bam", "/projects/med/hlab/bds_Yang/ASXL1_WTtest/align/rep2/Rep2_ASXL1_WT_R1.trim.PE2SE.nodup.bam", "/projects/med/hlab/bds_Yang/ASXL1_VAV/align/rep1/ASXL1_VAV_R1.trim.PE2SE.nodup.bam", "/projects/med/hlab/bds_Yang/ASXL1_VAV/align/rep2/Rep2_ASXL1_VAV_R1.trim.PE2SE.nodup.bam", "/projects/med/hlab/bds_Yang/ASXL1_SF/align/rep1/ASXL1_SF_R1.trim.PE2SE.nodup.bam", "/projects/med/hlab/bds_Yang/ASXL1_SF/align/rep2/Rep2_ASXL1_SF_R1.trim.PE2SE.nodup.bam"]
 bam_names = ["WT1", "WT2", "VAV1", "VAV2", "SF1", "SF2"]
-bed = "peaks_overlap_RNA_ATAC.bed"
-output_format = "violinN" #violin or something else
-normalize = [1, 1, 1, 1, 1, 1]
+bed = "peaks_overlap_STEM_ATAC.bed"
+output_format = "NO" #violin or something else
+normalize = [1, 0.649541687, 1.081444904, 1.38764356, 1.106862996, 1.662330617]
+
 
 ##### import bed file
 bedfile = []
@@ -40,8 +43,8 @@ subprocess.call(["rm", "temp_flagstat.txt"])
 
 if output_format == "violin":
     output_violin = [["value", "sample"]]
+    output.pop(0)
     for x, sample in enumerate(bam_names):
-        output.pop(0)
         for row in output:
             output_violin.append([row[x+3], sample])
     output = output_violin
